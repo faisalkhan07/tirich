@@ -162,15 +162,15 @@
 
 .mountainSvg {
   width: 100%;
-  height: clamp(240px, 45vh, 440px);
+  height: clamp(220px, 34vh, 305px);
   display: block;
 }
 
-/* Subtle elevation badge floating near Tirich Mir summit */
+/* Subtle elevation badge floating below Chitral near Tirich Mir summit */
 .peakMarker {
   position: absolute;
-  left: clamp(38%, 42%, 46%);
-  bottom: clamp(170px, 32vh, 320px);
+  left: clamp(39%, 42.5%, 45%);
+  bottom: clamp(145px, 22.5vh, 195px);
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -184,6 +184,7 @@
   pointer-events: auto;
   cursor: default;
   transition: transform 250ms ease, border-color 200ms ease;
+  z-index: 2;
 }
 
 .peakMarker:hover {
