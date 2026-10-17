@@ -1,0 +1,88 @@
+.tabBar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.5rem;
+}
+
+.tabItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  transition: all 150ms ease;
+}
+
+.tabItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.tabItemActive {
+  background: rgba(184, 242, 91, 0.15);
+  color: var(--color-lime);
+  border-color: rgba(184, 242, 91, 0.4);
+}
+
+.tabCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.searchBar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: var(--space-4);
+  align-items: center;
+}
+
+.searchInput {
+  flex: 1;
+  max-width: 500px;
+  padding: 0.65rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  font-size: 0.88rem;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-lime);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.searchBtn {
+  padding: 0.65rem 1.15rem;
+  font-size: 0.85rem;
+  border-radius: var(--radius-md);
+}
+
+.clearBtn {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: underline;
+  margin-left: 0.5rem;
+}
+
+.clearBtn:hover {
+  color: #ffffff;
+}

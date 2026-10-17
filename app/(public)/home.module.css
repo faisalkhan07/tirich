@@ -1,0 +1,34 @@
+.section {
+  margin-top: var(--space-12);
+}
+
+.title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-2xl);
+}
+
+.more {
+  margin-top: var(--space-6);
+  text-align: center;
+}
+
+.contact {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  padding: var(--space-8);
+  border-radius: var(--radius-md);
+  background: var(--color-forest);
+  color: var(--color-white);
+}
+
+.contactTitle {
+  margin: 0;
+  font-size: var(--text-xl);
+}
+
+.contact p {
+  margin: 0;
+  max-width: 50ch;
+  color: rgba(255, 255, 255, 0.85);
+}

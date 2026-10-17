@@ -1,0 +1,52 @@
+/*
+  Tirich design tokens — the ONLY place colors, fonts and spacing are defined.
+  Phase 6 design work edits this file; components reference these variables.
+*/
+:root {
+  /* Palette: forest green, fresh lime, apple red, warm cream */
+  --color-forest: #10301a;
+  --color-forest-soft: #1c4a2a;
+  --color-lime: #b8f25b;
+  --color-apple: #d8283a;
+  --color-apple-dark: #b81f2f;
+  --color-cream: #f7f3e8;
+  --color-white: #ffffff;
+  --color-text: #10301a;
+  --color-muted: #5b6b5f;
+  --color-border: #e2dccb;
+  --color-error: #b3261e;
+
+  --color-bg: var(--color-cream);
+  --color-surface: var(--color-white);
+  --color-cta: var(--color-apple);
+  --color-cta-text: var(--color-white);
+
+  /* Typography */
+  --font-body: var(--font-sans), system-ui, sans-serif;
+  --font-heading: var(--font-sans), system-ui, sans-serif;
+  --font-display: var(--font-display), "Outfit", sans-serif;
+  --font-script: var(--font-script-face), cursive;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+
+  /* Shape and motion */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-pill: 999px;
+  --shadow-card: 0 4px 20px rgba(16, 48, 26, 0.08);
+  --transition: 200ms ease;
+
+  --container-width: 1120px;
+}

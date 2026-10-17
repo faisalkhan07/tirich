@@ -1,0 +1,40 @@
+.footer {
+  background: var(--color-forest);
+  color: var(--color-white);
+  margin-top: var(--space-12);
+  padding-block: var(--space-8);
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: var(--text-lg);
+  color: var(--color-lime);
+}
+
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.links a {
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: var(--color-lime);
+}
+
+.copy {
+  margin-top: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}

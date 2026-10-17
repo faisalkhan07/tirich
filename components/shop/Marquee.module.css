@@ -1,0 +1,53 @@
+.band {
+  overflow: hidden;
+  background: var(--color-lime);
+  color: var(--color-forest);
+  transform: rotate(-1.5deg);
+  margin-block: var(--space-8);
+  box-shadow: var(--shadow-card);
+  user-select: none;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: scroll 40s linear infinite;
+  will-change: transform;
+}
+
+.list {
+  display: flex;
+  margin: 0;
+  padding: var(--space-3) 0;
+  list-style: none;
+  font-size: var(--text-lg);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.list li {
+  white-space: nowrap;
+  padding-inline: var(--space-6);
+}
+
+.list li::after {
+  content: "\2022";
+  margin-left: calc(var(--space-6) * 2);
+  color: var(--color-apple);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

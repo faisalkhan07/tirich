@@ -1,0 +1,169 @@
+// Tirich — Prisma schema (PostgreSQL / Supabase)
+// Prices are whole PKR integers.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ProductType {
+  JAM
+  FRUIT
+}
+
+enum FruitUnit {
+  KG
+}
+
+enum OrderStatus {
+  NEW
+  CONFIRMED
+  DISPATCHED
+  DELIVERED
+  CANCELLED
+}
+
+enum BulkRequestStatus {
+  NEW
+  QUOTED
+  CONFIRMED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  COD
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  type        ProductType
+  name        String
+  slug        String      @unique
+  description String      @default("")
+  images      String[]    @default([])
+  isActive    Boolean     @default(true)
+  isAvailable Boolean     @default(true)
+  isFeatured  Boolean     @default(false)
+  sortOrder   Int         @default(0)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Jam fields
+  ingredients String?
+  shelfLife   String?
+
+  // Fruit fields (bulk, KG only; unitPrice is an approximate guide)
+  origin     String?
+  unit       FruitUnit?
+  unitPrice  Int?
+  minQty     Int?
+  seasonNote String?
+
+  variants     ProductVariant[]
+  orderItems   OrderItem[]
+  bulkRequests BulkRequest[]
+
+  @@index([type, isActive])
+}
+
+model ProductVariant {
+  id        String  @id @default(cuid())
+  productId String
+  label     String
+  price     Int
+  stock     Int?
+  sortOrder Int     @default(0)
+
+  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+
+  @@index([productId])
+}
+
+model Order {
+  id            String        @id @default(cuid())
+  referenceNo   String        @unique
+  customerName  String
+  phone         String
+  address       String
+  city          String
+  notes         String?
+  status        OrderStatus   @default(NEW)
+  subtotal      Int
+  deliveryFee   Int
+  total         Int
+  paymentMethod PaymentMethod @default(COD)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  items OrderItem[]
+
+  @@index([status, createdAt])
+  @@index([phone])
+}
+
+model OrderItem {
+  id            String  @id @default(cuid())
+  orderId       String
+  productId     String
+  variantId     String
+  nameSnapshot  String
+  labelSnapshot String
+  priceSnapshot Int
+  quantity      Int
+
+  order   Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product        @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant ProductVariant @relation(fields: [variantId], references: [id], onDelete: Restrict)
+
+  @@index([orderId])
+}
+
+model BulkRequest {
+  id           String            @id @default(cuid())
+  referenceNo  String            @unique
+  productId    String
+  quantity     Int
+  unit         FruitUnit         @default(KG)
+  customerName String
+  phone        String
+  city         String
+  deliveryDate DateTime
+  notes        String?
+  status       BulkRequestStatus @default(NEW)
+  quotedPrice  Int?
+  adminNote    String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([status, createdAt])
+  @@index([phone])
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model Setting {
+  key   String @id
+  value String
+}
+
+// DB-based rate limiting (Vercel is serverless, so no in-memory state)
+model RateLimit {
+  id        String   @id @default(cuid())
+  key       String
+  createdAt DateTime @default(now())
+
+  @@index([key, createdAt])
+}

@@ -1,0 +1,338 @@
+.container {
+  margin-top: var(--space-4);
+}
+
+.callout {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  background: rgba(184, 242, 91, 0.2);
+  border: 1px solid rgba(184, 242, 91, 0.6);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-8);
+  align-items: flex-start;
+}
+
+.calloutIcon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.calloutBody strong {
+  display: block;
+  color: var(--color-forest);
+  font-size: var(--text-base);
+  margin-bottom: var(--space-1);
+}
+
+.calloutBody p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-forest);
+  line-height: 1.5;
+}
+
+.alertError {
+  background: #fde8e8;
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-6);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .formGrid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  }
+}
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cardTitle {
+  font-size: var(--text-lg);
+  color: var(--color-forest);
+  margin: 0;
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid var(--color-cream);
+}
+
+.fruitPicker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-3);
+}
+
+.fruitChip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition);
+}
+
+.fruitChip:hover {
+  border-color: var(--color-forest);
+  transform: translateY(-2px);
+}
+
+.activeFruit {
+  border-color: var(--color-forest);
+  background: rgba(184, 242, 91, 0.25);
+  box-shadow: 0 4px 12px rgba(184, 242, 91, 0.3);
+}
+
+.chipMedia {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-cream);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chipImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chipInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.chipName {
+  font-size: var(--text-sm);
+  color: var(--color-forest);
+}
+
+.chipGuide {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.fruitPreview {
+  background: var(--color-cream);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+}
+
+.previewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.previewName {
+  margin: 0;
+  font-size: var(--text-lg);
+  color: var(--color-forest);
+}
+
+.previewDesc {
+  margin: 0.2rem 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.rateGuideBox {
+  background: var(--color-surface);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.rateLabel {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.rateValue {
+  font-size: var(--text-base);
+  color: var(--color-forest);
+}
+
+.metaList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-forest);
+}
+
+.qtySection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.stepperRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 0.2rem;
+  gap: var(--space-1);
+}
+
+.stepBtn {
+  padding: 0.4rem 0.7rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-forest);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.stepBtn:hover {
+  background: var(--color-lime);
+  border-color: var(--color-forest);
+}
+
+.qtyInput {
+  width: 70px;
+  text-align: center;
+  border: none;
+  background: transparent;
+  font-size: var(--text-lg);
+  font-weight: 800;
+  color: var(--color-forest);
+  padding: 0.2rem;
+}
+
+.qtyInput:focus {
+  outline: none;
+}
+
+.unitSuffix {
+  font-weight: 800;
+  font-size: var(--text-base);
+  color: var(--color-forest);
+  padding-right: var(--space-2);
+}
+
+.approxBox {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3);
+  background: rgba(184, 242, 91, 0.2);
+  border: 1px dashed var(--color-forest);
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-2);
+}
+
+.approxBox span {
+  font-size: var(--text-sm);
+  color: var(--color-forest);
+}
+
+.approxValue {
+  font-size: var(--text-xl);
+  color: var(--color-forest);
+}
+
+.approxNote {
+  font-size: 0.75rem !important;
+  color: var(--color-muted) !important;
+}
+
+.honeypot {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.label {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--color-forest);
+}
+
+.req {
+  color: var(--color-apple);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  font-size: var(--text-base);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-forest);
+  box-shadow: 0 0 0 3px rgba(184, 242, 91, 0.4);
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.submitBtn {
+  width: 100%;
+  margin-top: var(--space-2);
+  padding-block: 0.95rem;
+  font-size: var(--text-base);
+  font-weight: 700;
+}

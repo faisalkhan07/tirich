@@ -1,0 +1,108 @@
+.header {
+  background: var(--color-forest);
+  color: var(--color-white);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding-block: var(--space-4);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--color-lime);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: transform var(--transition);
+}
+
+.logo:hover {
+  transform: translateY(-1px);
+}
+
+.mountainMark {
+  display: block;
+  flex-shrink: 0;
+  color: var(--color-lime);
+}
+
+.rightGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.nav a:hover {
+  color: var(--color-lime);
+}
+
+.cartBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  transition: transform var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.cartBtn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: var(--color-lime);
+  color: var(--color-lime);
+  transform: translateY(-1px);
+}
+
+.cartIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.cartLabel {
+  font-size: var(--text-sm);
+}
+
+.cartBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  background: var(--color-lime);
+  color: var(--color-forest);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1;
+}

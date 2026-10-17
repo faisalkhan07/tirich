@@ -1,0 +1,150 @@
+.container {
+  margin-block: var(--space-4);
+}
+
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  border: 0;
+}
+
+.legend {
+  padding: 0;
+  margin-bottom: var(--space-2);
+  font-weight: 700;
+  font-size: var(--text-base);
+  color: var(--color-forest);
+}
+
+.size {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 110px;
+  padding: var(--space-3) var(--space-4);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition), background var(--transition);
+}
+
+.size:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-forest);
+}
+
+.size input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.size:has(input:focus-visible) {
+  outline: 3px solid var(--color-lime);
+}
+
+.active {
+  border-color: var(--color-forest);
+  background: rgba(184, 242, 91, 0.25);
+}
+
+.sizeLabel {
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.sizePrice {
+  font-size: var(--text-base);
+  color: var(--color-forest);
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.priceLabel {
+  color: var(--color-muted);
+  font-size: var(--text-base);
+}
+
+.priceVal {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--color-forest);
+}
+
+.actionBlock {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.qtyGroup {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 0.15rem;
+}
+
+.qtyBtn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: var(--color-forest);
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.qtyBtn:hover {
+  background: var(--color-cream);
+}
+
+.qtyValue {
+  min-width: 32px;
+  text-align: center;
+  font-weight: 700;
+  font-size: var(--text-base);
+}
+
+.addBtn {
+  flex: 1;
+  min-width: 170px;
+  transition: all var(--transition);
+}
+
+.addedBtn {
+  background: var(--color-forest);
+  color: var(--color-lime);
+}
+
+.viewCartLink {
+  animation: fadeIn 200ms ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
