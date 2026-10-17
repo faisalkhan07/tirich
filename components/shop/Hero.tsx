@@ -31,7 +31,13 @@ export default function Hero() {
         <div className={styles.copy}>
           <h1 className={styles.heading}>
             <span className={styles.eyebrow}>{home.heroEyebrow}</span>
-            <span className={styles.script}>{home.heroScript}</span>
+            <div className={styles.scriptWrapper}>
+              <span className={styles.script}>{home.heroScript}</span>
+              <div className={styles.peakMarker}>
+                <span className={styles.beaconDot} />
+                <span className={styles.peakBadge}>Tirich Mir • 7,708m</span>
+              </div>
+            </div>
           </h1>
           <p className={styles.text}>{home.heroText}</p>
           <div className={styles.actions}>
@@ -115,12 +121,6 @@ export default function Hero() {
             fill="rgba(16, 48, 26, 0.65)"
           />
         </svg>
-
-        {/* Mountain Summit Marker */}
-        <div className={styles.peakMarker}>
-          <span className={styles.beaconDot} />
-          <span className={styles.peakBadge}>Tirich Mir • 7,708m</span>
-        </div>
       </div>
     </section>
   );
