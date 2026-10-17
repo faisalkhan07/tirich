@@ -25,26 +25,8 @@ export default function Hero() {
     ref.current?.style.setProperty("--my", "0");
   }
 
-  // Touch parallax/tilt for mobile responsiveness
-  function onTouch(e: React.TouchEvent<HTMLElement>) {
-    const el = ref.current;
-    if (!el || !e.touches[0]) return;
-    const rect = el.getBoundingClientRect();
-    const touch = e.touches[0];
-    const x = (touch.clientX - rect.left) / rect.width - 0.5;
-    const y = (touch.clientY - rect.top) / rect.height - 0.5;
-    el.style.setProperty("--mx", x.toFixed(3));
-    el.style.setProperty("--my", y.toFixed(3));
-  }
-
   return (
-    <section
-      ref={ref}
-      className={styles.hero}
-      onPointerMove={onMove}
-      onPointerLeave={onLeave}
-      onTouchMove={onTouch}
-    >
+    <section ref={ref} className={styles.hero} onPointerMove={onMove} onPointerLeave={onLeave}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.copy}>
           <h1 className={styles.heading}>
@@ -62,7 +44,7 @@ export default function Hero() {
           </div>
         </div>
         <div className={styles.appleWrap}>
-          <div className={styles.apple} title="Fresh Chitral Apple - tap to interact">
+          <div className={styles.apple}>
             <Image
               src="/images/hero-apple.jpg"
               alt="A fresh red Chitral apple, cut open"
@@ -73,7 +55,6 @@ export default function Hero() {
               className={styles.appleImg}
             />
           </div>
-          <div className={styles.appleShadow} aria-hidden="true" />
         </div>
       </div>
 
@@ -86,54 +67,52 @@ export default function Hero() {
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
         >
-          {/* Vibrant gradient definitions for Hindu Kush / Tirich Mir visibility */}
+          {/* Subtle gradient definitions */}
           <defs>
-            <linearGradient id="peakGlow" x1="720" y1="40" x2="720" y2="400" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#b8f25b" stopOpacity="0.65" />
-              <stop offset="25%" stopColor="#246a3a" stopOpacity="0.85" />
-              <stop offset="65%" stopColor="#144222" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#0b2212" stopOpacity="0.98" />
+            <linearGradient id="peakGlow" x1="600" y1="50" x2="600" y2="400" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="var(--color-lime)" stopOpacity="0.28" />
+              <stop offset="50%" stopColor="var(--color-forest)" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="var(--color-forest)" stopOpacity="0.85" />
             </linearGradient>
-            <linearGradient id="snowHighlight" x1="720" y1="50" x2="720" y2="160" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.98" />
-              <stop offset="60%" stopColor="#e8ffd1" stopOpacity="0.75" />
-              <stop offset="100%" stopColor="#b8f25b" stopOpacity="0.15" />
+            <linearGradient id="snowHighlight" x1="570" y1="60" x2="630" y2="160" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="var(--color-lime)" stopOpacity="0.05" />
             </linearGradient>
-            <linearGradient id="distantRidge" x1="0" y1="180" x2="1440" y2="400" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="rgba(255, 255, 255, 0.18)" />
-              <stop offset="45%" stopColor="rgba(184, 242, 91, 0.28)" />
-              <stop offset="100%" stopColor="rgba(255, 255, 255, 0.12)" />
+            <linearGradient id="distantRidge" x1="0" y1="200" x2="1440" y2="400" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="rgba(255, 255, 255, 0.05)" />
+              <stop offset="50%" stopColor="rgba(184, 242, 91, 0.09)" />
+              <stop offset="100%" stopColor="rgba(255, 255, 255, 0.03)" />
             </linearGradient>
           </defs>
 
           {/* Layer 1: Distant Hindu Kush jagged range */}
           <path
-            d="M0 310 L90 260 L180 290 L290 220 L380 265 L480 205 L580 245 L680 175 L790 235 L910 195 L1020 255 L1130 210 L1240 270 L1350 230 L1440 270 L1440 400 L0 400 Z"
+            d="M0 310 L90 270 L180 295 L290 230 L380 270 L480 215 L580 250 L680 190 L790 245 L910 205 L1020 260 L1130 220 L1240 275 L1350 240 L1440 280 L1440 400 L0 400 Z"
             fill="url(#distantRidge)"
           />
 
-          {/* Layer 2: Tirich Mir (7,708m) Main Pyramid Massif - Centered at 720 (50% width) */}
+          {/* Layer 2: Tirich Mir (7,708m) Main Pyramid Massif */}
           <path
-            d="M300 400 L460 260 L580 180 L720 50 L860 175 L980 255 L1140 400 Z"
+            d="M240 400 L380 270 L490 195 L600 60 L710 185 L830 260 L980 400 Z"
             fill="url(#peakGlow)"
           />
 
-          {/* Faceted Ridge Shade (Adds true 3D alpine relief to the mountain) */}
+          {/* Faceted Ridge Shade (Adds 3D relief to the mountain) */}
           <path
-            d="M720 50 L720 400 L860 175 L720 50 Z"
-            fill="rgba(0, 0, 0, 0.32)"
+            d="M600 60 L600 400 L710 185 L600 60 Z"
+            fill="rgba(0, 0, 0, 0.22)"
           />
 
           {/* Glaciated / Snow Summit of Tirich Mir */}
           <path
-            d="M720 50 L655 140 L695 125 L720 150 L745 128 L785 142 Z"
+            d="M600 60 L565 125 L590 115 L600 135 L615 118 L640 130 Z"
             fill="url(#snowHighlight)"
           />
 
           {/* Layer 3: Susoom Valley foothills in front */}
           <path
-            d="M0 350 Q 320 275 640 345 T 1280 330 T 1440 360 L 1440 400 L0 400 Z"
-            fill="rgba(16, 48, 26, 0.85)"
+            d="M0 360 Q 320 290 640 355 T 1280 340 T 1440 370 L 1440 400 L0 400 Z"
+            fill="rgba(16, 48, 26, 0.65)"
           />
         </svg>
 

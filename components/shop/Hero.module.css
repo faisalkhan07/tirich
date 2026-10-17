@@ -5,32 +5,29 @@
   overflow: hidden;
   background: radial-gradient(ellipse at 72% 45%, var(--color-forest-soft), var(--color-forest) 68%);
   color: var(--color-white);
-  padding-block: var(--space-8) calc(var(--space-12) * 1.4);
-  /* gentle fade into the cream page below without hiding the mountain base */
-  -webkit-mask-image: linear-gradient(#000 94%, transparent 100%);
-  mask-image: linear-gradient(#000 94%, transparent 100%);
+  padding-block: var(--space-8) calc(var(--space-12) * 1.5);
+  /* fade into the cream page below */
+  -webkit-mask-image: linear-gradient(#000 88%, transparent);
+  mask-image: linear-gradient(#000 88%, transparent);
 }
 
 .inner {
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-  gap: var(--space-6);
-  position: relative;
-  z-index: 2;
+  gap: var(--space-4);
 }
 
 @media (min-width: 900px) {
   .inner {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     min-height: 560px;
-    gap: var(--space-8);
   }
 }
 
 .copy {
   position: relative;
-  z-index: 3;
+  z-index: 2;
   text-align: center;
 }
 
@@ -65,21 +62,19 @@
 .script {
   font-family: var(--font-script);
   font-weight: 400;
-  font-size: clamp(3.8rem, 15vw, 8.5rem);
-  line-height: 1.1;
+  font-size: clamp(4.5rem, 17vw, 9.5rem);
+  line-height: 1.15;
   color: var(--color-lime);
-  text-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 45px rgba(184, 242, 91, 0.3);
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   transform: translate(calc(var(--mx) * -16px), calc(var(--my) * -10px));
   transition: transform 150ms ease-out;
-  display: inline-block;
 }
 
 .text {
   max-width: 44ch;
   margin: var(--space-4) auto var(--space-6);
   font-size: var(--text-lg);
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
 }
 
 @media (min-width: 900px) {
@@ -103,81 +98,39 @@
 
 .appleWrap {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
 }
 
 .apple {
-  width: min(84vw, 480px);
-  position: relative;
-  /* soft feathered edge blending image seamlessly with mountain backdrop */
-  -webkit-mask-image: radial-gradient(closest-side, #000 68%, transparent 100%);
-  mask-image: radial-gradient(closest-side, #000 68%, transparent 100%);
-  animation: floatApple 4.8s ease-in-out infinite;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  transition: transform 200ms ease;
-}
-
-.apple:active {
-  transform: translateY(-8px) scale(1.05) rotate(3deg);
+  width: min(88vw, 560px);
+  /* soft edge so the photo background blends into the hero */
+  -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 62%, transparent 100%);
+  animation: float 6s ease-in-out infinite;
 }
 
 .appleImg {
   display: block;
   width: 100%;
   height: auto;
-  transform: translate(calc(var(--mx) * 28px), calc(var(--my) * 18px)) rotate(calc(var(--mx) * 6deg));
-  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.4, 1);
+  transform: translate(calc(var(--mx) * 26px), calc(var(--my) * 16px)) rotate(calc(var(--mx) * 7deg));
+  transition: transform 150ms ease-out;
 }
 
-/* Noticeable, organic floating animation */
-@keyframes floatApple {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg) scale(1);
-  }
-  25% {
-    transform: translateY(-16px) rotate(2.2deg) scale(1.02);
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-26px) rotate(-1.8deg) scale(1.035);
-  }
-  75% {
-    transform: translateY(-12px) rotate(1.2deg) scale(1.015);
-  }
-}
-
-/* Dynamic soft ground shadow that contracts when apple ascends */
-.appleShadow {
-  width: 60%;
-  max-width: 280px;
-  height: 22px;
-  margin: -14px auto 0;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.48) 0%, rgba(16, 48, 26, 0.25) 45%, transparent 72%);
-  border-radius: 50%;
-  animation: shadowPulse 4.8s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes shadowPulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.65;
-  }
-  50% {
-    transform: scale(0.72);
-    opacity: 0.3;
+    transform: translateY(-14px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .apple,
-  .appleShadow {
+  .apple {
     animation: none;
   }
   .appleImg,
@@ -197,71 +150,69 @@
   bottom: 0;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
   overflow: hidden;
   display: flex;
   align-items: flex-end;
   /* Subtly reacts to mouse movement in counter-parallax direction for deep 3D sensation */
-  transform: translate(calc(var(--mx) * -16px), calc(var(--my) * -8px));
+  transform: translate(calc(var(--mx) * -14px), calc(var(--my) * -6px));
   transition: transform 160ms cubic-bezier(0.2, 0.8, 0.4, 1);
-  opacity: 0.95;
+  opacity: 0.85;
 }
 
 .mountainSvg {
   width: 100%;
-  height: clamp(340px, 60vh, 520px);
+  height: clamp(240px, 45vh, 440px);
   display: block;
 }
 
-/* Elevation badge floating directly over centered Tirich Mir summit */
+/* Subtle elevation badge floating near Tirich Mir summit */
 .peakMarker {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: clamp(280px, 46vh, 440px);
+  left: clamp(38%, 42%, 46%);
+  bottom: clamp(170px, 32vh, 320px);
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  background: rgba(16, 48, 26, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(184, 242, 91, 0.55);
-  padding: 0.3rem 0.85rem;
+  background: rgba(16, 48, 26, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(184, 242, 91, 0.35);
+  padding: 0.25rem 0.75rem;
   border-radius: var(--radius-pill);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   pointer-events: auto;
   cursor: default;
   transition: transform 250ms ease, border-color 200ms ease;
-  z-index: 4;
 }
 
 .peakMarker:hover {
-  transform: translateX(-50%) scale(1.06);
+  transform: scale(1.05);
   border-color: var(--color-lime);
 }
 
 .beaconDot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background: var(--color-lime);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--color-lime);
+  box-shadow: 0 0 8px var(--color-lime);
   animation: beaconPulse 2s infinite ease-in-out;
 }
 
 @keyframes beaconPulse {
   0%, 100% {
-    opacity: 0.6;
+    opacity: 0.5;
     transform: scale(0.9);
   }
   50% {
     opacity: 1;
-    transform: scale(1.35);
+    transform: scale(1.3);
   }
 }
 
 .peakBadge {
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -270,18 +221,9 @@
 }
 
 @media (max-width: 768px) {
-  .inner {
-    padding-top: var(--space-2);
-  }
-  .mountainSvg {
-    height: clamp(280px, 48vh, 400px);
-  }
   .peakMarker {
     left: 50%;
     transform: translateX(-50%);
-    bottom: clamp(190px, 32vh, 280px);
-  }
-  .peakMarker:hover {
-    transform: translateX(-50%) scale(1.04);
+    bottom: 220px;
   }
 }
