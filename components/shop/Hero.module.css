@@ -213,15 +213,16 @@
   display: block;
 }
 
-/* Elevation badge floating near Tirich Mir summit */
+/* Elevation badge floating directly over centered Tirich Mir summit */
 .peakMarker {
   position: absolute;
-  left: clamp(36%, 42%, 46%);
-  bottom: clamp(240px, 42vh, 410px);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(280px, 46vh, 440px);
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  background: rgba(16, 48, 26, 0.82);
+  background: rgba(16, 48, 26, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(184, 242, 91, 0.55);
@@ -235,7 +236,7 @@
 }
 
 .peakMarker:hover {
-  transform: scale(1.06);
+  transform: translateX(-50%) scale(1.06);
   border-color: var(--color-lime);
 }
 
@@ -279,5 +280,8 @@
     left: 50%;
     transform: translateX(-50%);
     bottom: clamp(190px, 32vh, 280px);
+  }
+  .peakMarker:hover {
+    transform: translateX(-50%) scale(1.04);
   }
 }

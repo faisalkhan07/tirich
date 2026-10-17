@@ -88,13 +88,13 @@ export default function Hero() {
         >
           {/* Vibrant gradient definitions for Hindu Kush / Tirich Mir visibility */}
           <defs>
-            <linearGradient id="peakGlow" x1="600" y1="40" x2="600" y2="400" gradientUnits="userSpaceOnUse">
+            <linearGradient id="peakGlow" x1="720" y1="40" x2="720" y2="400" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#b8f25b" stopOpacity="0.65" />
               <stop offset="25%" stopColor="#246a3a" stopOpacity="0.85" />
               <stop offset="65%" stopColor="#144222" stopOpacity="0.95" />
               <stop offset="100%" stopColor="#0b2212" stopOpacity="0.98" />
             </linearGradient>
-            <linearGradient id="snowHighlight" x1="600" y1="50" x2="600" y2="160" gradientUnits="userSpaceOnUse">
+            <linearGradient id="snowHighlight" x1="720" y1="50" x2="720" y2="160" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#ffffff" stopOpacity="0.98" />
               <stop offset="60%" stopColor="#e8ffd1" stopOpacity="0.75" />
               <stop offset="100%" stopColor="#b8f25b" stopOpacity="0.15" />
@@ -112,21 +112,21 @@ export default function Hero() {
             fill="url(#distantRidge)"
           />
 
-          {/* Layer 2: Tirich Mir (7,708m) Main Pyramid Massif */}
+          {/* Layer 2: Tirich Mir (7,708m) Main Pyramid Massif - Centered at 720 (50% width) */}
           <path
-            d="M200 400 L360 260 L480 180 L600 50 L720 175 L850 255 L1020 400 Z"
+            d="M300 400 L460 260 L580 180 L720 50 L860 175 L980 255 L1140 400 Z"
             fill="url(#peakGlow)"
           />
 
           {/* Faceted Ridge Shade (Adds true 3D alpine relief to the mountain) */}
           <path
-            d="M600 50 L600 400 L720 175 L600 50 Z"
+            d="M720 50 L720 400 L860 175 L720 50 Z"
             fill="rgba(0, 0, 0, 0.32)"
           />
 
           {/* Glaciated / Snow Summit of Tirich Mir */}
           <path
-            d="M600 50 L535 140 L575 125 L600 150 L625 128 L665 142 Z"
+            d="M720 50 L655 140 L695 125 L720 150 L745 128 L785 142 Z"
             fill="url(#snowHighlight)"
           />
 
