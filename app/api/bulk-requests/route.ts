@@ -30,13 +30,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { productId, quantity, deliveryDate, customerName, phone, city, notes, honeypot } =
+    const { productId, quantity, deliveryDate, customerName, phone, city, notes } =
       parsed.data;
-
-    // Honeypot check
-    if (honeypot && honeypot.length > 0) {
-      return NextResponse.json({ error: "Invalid request." }, { status: 400 });
-    }
 
     const normalizedPhone = normalizePkPhone(phone);
     if (!normalizedPhone) {

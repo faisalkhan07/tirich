@@ -31,12 +31,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { customerName, phone, address, city, notes, items, honeypot } = parsed.data;
-
-    // Anti-spam honeypot
-    if (honeypot && honeypot.length > 0) {
-      return NextResponse.json({ error: "Invalid request." }, { status: 400 });
-    }
+    const { customerName, phone, address, city, notes, items } = parsed.data;
 
     const normalizedPhone = normalizePkPhone(phone);
     if (!normalizedPhone) {

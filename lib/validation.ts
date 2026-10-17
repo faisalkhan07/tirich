@@ -39,7 +39,7 @@ export const checkoutSchema = z.object({
   address: z.string().trim().min(5, "Please enter your complete street address"),
   city: z.string().trim().min(2, "Please enter your city"),
   notes: z.string().trim().max(500, "Notes cannot exceed 500 characters").optional(),
-  honeypot: z.string().max(0, "Bot detected").optional(),
+  honeypot: z.string().optional(),
   items: z.array(orderItemSchema).min(1, "Your cart is empty"),
 });
 
@@ -63,7 +63,7 @@ export const bulkRequestSchema = z.object({
   }),
   city: z.string().trim().min(2, "Please enter your delivery city"),
   notes: z.string().trim().max(500, "Notes cannot exceed 500 characters").optional(),
-  honeypot: z.string().max(0, "Bot detected").optional(),
+  honeypot: z.string().optional(),
 });
 
 export type BulkRequestInput = z.infer<typeof bulkRequestSchema>;

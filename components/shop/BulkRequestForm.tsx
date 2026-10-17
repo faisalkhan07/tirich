@@ -257,17 +257,6 @@ export default function BulkRequestForm({ fruits, initialFruitSlug }: Props) {
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>2. Delivery & Contact Details</h2>
 
-            {/* Honeypot field */}
-            <input
-              type="text"
-              name="company_url"
-              value={honeypot}
-              onChange={(e) => setHoneypot(e.target.value)}
-              className={styles.honeypot}
-              tabIndex={-1}
-              autoComplete="off"
-            />
-
             <div className={styles.formGroup}>
               <label htmlFor="customerName" className={styles.label}>
                 Your Full Name <span className={styles.req}>*</span>

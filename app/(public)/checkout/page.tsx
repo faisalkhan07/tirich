@@ -112,17 +112,6 @@ export default function CheckoutPage() {
           <form onSubmit={handleSubmit} className={styles.formCard}>
             <h2 className={styles.sectionHeading}>1. Delivery Information</h2>
 
-            {/* Honeypot field for spam prevention (invisible to real users) */}
-            <input
-              type="text"
-              name="company_name"
-              value={honeypot}
-              onChange={(e) => setHoneypot(e.target.value)}
-              className={styles.honeypot}
-              tabIndex={-1}
-              autoComplete="off"
-            />
-
             <div className={styles.formGroup}>
               <label htmlFor="customerName" className={styles.label}>
                 Full Name <span className={styles.req}>*</span>
