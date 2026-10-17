@@ -80,8 +80,8 @@
 /* Elevation badge shifted right and below Chitral exactly as in screenshot */
 .peakMarker {
   position: absolute;
-  right: -38px;
-  bottom: -16px;
+  right: -72px;
+  bottom: -12px;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
