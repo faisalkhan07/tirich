@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { customerName, phone, address, city, notes, items } = parsed.data;
+    const { customerName, customerEmail, phone, address, city, notes, items } = parsed.data;
 
     const normalizedPhone = normalizePkPhone(phone);
     if (!normalizedPhone) {
@@ -101,6 +101,7 @@ export async function POST(req: NextRequest) {
         data: {
           referenceNo,
           customerName,
+          customerEmail: customerEmail || null,
           phone: normalizedPhone,
           address,
           city,
@@ -135,6 +136,7 @@ export async function POST(req: NextRequest) {
       id: newOrder.id,
       referenceNo: newOrder.referenceNo,
       customerName: newOrder.customerName,
+      customerEmail: customerEmail || null,
       phone: newOrder.phone,
       address: newOrder.address,
       city: newOrder.city,

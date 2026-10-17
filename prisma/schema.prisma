@@ -89,6 +89,7 @@ model Order {
   id            String        @id @default(cuid())
   referenceNo   String        @unique
   customerName  String
+  customerEmail String?
   phone         String
   address       String
   city          String

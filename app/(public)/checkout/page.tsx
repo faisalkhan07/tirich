@@ -16,6 +16,7 @@ export default function CheckoutPage() {
   const { items, itemsCount, subtotal, clearCart, isHydrated } = useCart();
 
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -62,6 +63,7 @@ export default function CheckoutPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           customerName: name,
+          customerEmail: email.trim() || undefined,
           phone,
           address,
           city,
@@ -142,6 +144,23 @@ export default function CheckoutPage() {
               />
               <span className={styles.hint}>
                 Used by the courier rider to coordinate your delivery.
+              </span>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="email" className={styles.label}>
+                Email Address <span className={styles.hint} style={{ fontWeight: 400 }}>(Optional)</span>
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className={styles.input}
+              />
+              <span className={styles.hint}>
+                Provide your email if you would like an instant digital receipt and order updates.
               </span>
             </div>
 

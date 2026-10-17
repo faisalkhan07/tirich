@@ -33,6 +33,12 @@ export const orderItemSchema = z.object({
 
 export const checkoutSchema = z.object({
   customerName: z.string().trim().min(2, "Please enter your full name (at least 2 characters)"),
+  customerEmail: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address")
+    .optional()
+    .or(z.literal("")),
   phone: z.string().trim().refine((val) => normalizePkPhone(val) !== null, {
     message: "Please enter a valid Pakistani mobile number (e.g. 0300 1234567)",
   }),
