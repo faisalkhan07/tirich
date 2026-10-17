@@ -77,11 +77,11 @@
   transition: transform 150ms ease-out;
 }
 
-/* Elevation badge lowered to sit cleanly below the bottom curves of Chitral */
+/* Elevation badge shifted right and below Chitral exactly as in screenshot */
 .peakMarker {
   position: absolute;
-  right: 0px;
-  bottom: -18px;
+  right: -38px;
+  bottom: -16px;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
