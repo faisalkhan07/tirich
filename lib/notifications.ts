@@ -53,8 +53,8 @@ async function dispatchEmail({
   subject: string;
   html: string;
 }): Promise<boolean> {
-  const smtpUser = process.env.SMTP_USER?.trim();
-  const smtpPass = process.env.SMTP_PASS?.trim();
+  const smtpUser = process.env.SMTP_USER?.trim() || "sultanbaghe@gmail.com";
+  const smtpPass = process.env.SMTP_PASS?.trim() || "anpaiypcbykpfgth";
   const smtpFrom = process.env.SMTP_FROM?.trim() || `"Tirich Orders" <${smtpUser}>`;
 
   // 1. Try Gmail SMTP
