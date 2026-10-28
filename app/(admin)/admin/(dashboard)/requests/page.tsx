@@ -14,12 +14,13 @@ type Props = {
 export default async function AdminBulkRequestsPage({ searchParams }: Props) {
   const { status, q } = await searchParams;
 
+  const isAll = status === "ALL";
   const validStatus = status && Object.values(BulkRequestStatus).includes(status as BulkRequestStatus)
     ? (status as BulkRequestStatus)
     : undefined;
 
   const whereClause: {
-    status?: BulkRequestStatus;
+    status?: BulkRequestStatus | { in: BulkRequestStatus[] };
     OR?: Array<{
       referenceNo?: { contains: string; mode: "insensitive" };
       customerName?: { contains: string; mode: "insensitive" };
@@ -30,6 +31,10 @@ export default async function AdminBulkRequestsPage({ searchParams }: Props) {
 
   if (validStatus) {
     whereClause.status = validStatus;
+  } else if (!isAll) {
+    // Default active operational queue: NEW, QUOTED, CONFIRMED.
+    // Delivered quote requests automatically disappear from active queue!
+    whereClause.status = { in: ["NEW", "QUOTED", "CONFIRMED"] };
   }
 
   if (q && q.trim().length > 0) {
@@ -60,14 +65,16 @@ export default async function AdminBulkRequestsPage({ searchParams }: Props) {
 
   const [totalCount, newCount, quotedCount, confirmedCount, deliveredCount, cancelledCount] =
     counts;
+  const activeCount = newCount + quotedCount + confirmedCount;
 
   const tabs = [
-    { label: "All Requests", value: "", count: totalCount },
+    { label: "Active Queue", value: "", count: activeCount },
     { label: "New (Needs Quote)", value: "NEW", count: newCount },
     { label: "Quoted", value: "QUOTED", count: quotedCount },
     { label: "Confirmed (Packing)", value: "CONFIRMED", count: confirmedCount },
-    { label: "Delivered", value: "DELIVERED", count: deliveredCount },
+    { label: "Delivered (Archive)", value: "DELIVERED", count: deliveredCount },
     { label: "Cancelled", value: "CANCELLED", count: cancelledCount },
+    { label: "All Requests", value: "ALL", count: totalCount },
   ];
 
   return (
@@ -75,14 +82,20 @@ export default async function AdminBulkRequestsPage({ searchParams }: Props) {
       <div className={styles.pageHeader}>
         <div className={styles.titleGroup}>
           <h1>Bulk Fruit Order Quotes</h1>
-          <p>Review mountain harvest volume requests, quote locked rates, and message customers directly on WhatsApp.</p>
+          <p>
+            {validStatus === "DELIVERED"
+              ? "Completed bulk fruit deliveries archive."
+              : isAll
+              ? "Complete historical log of all bulk fruit requests."
+              : "Active requests queue. Once delivered, requests automatically move to the Completed archive."}
+          </p>
         </div>
       </div>
 
       {/* Tabs */}
       <div className={orderStyles.tabBar}>
         {tabs.map((tab) => {
-          const isActive = (tab.value === "" && !validStatus) || validStatus === tab.value;
+          const isActive = (tab.value === "" && !validStatus && !isAll) || (tab.value === "ALL" && isAll) || validStatus === tab.value;
           const href = tab.value ? `/admin/requests?status=${tab.value}` : "/admin/requests";
 
           return (

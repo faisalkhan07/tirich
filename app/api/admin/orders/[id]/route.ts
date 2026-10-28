@@ -39,3 +39,23 @@ export async function PATCH(req: NextRequest, { params }: Props) {
     return NextResponse.json({ error: "Failed to update order." }, { status: 500 });
   }
 }
+
+export async function DELETE(_req: NextRequest, { params }: Props) {
+  try {
+    const session = await getAdminSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { id } = await params;
+    await db.$transaction([
+      db.orderItem.deleteMany({ where: { orderId: id } }),
+      db.order.delete({ where: { id } }),
+    ]);
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error("Order deletion error:", error);
+    return NextResponse.json({ error: "Failed to delete order." }, { status: 500 });
+  }
+}

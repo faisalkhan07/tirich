@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { formatPKR } from "@/lib/format";
 import PrintButton from "@/components/admin/PrintButton";
+import DeleteOrderButton from "@/components/admin/DeleteOrderButton";
 import OrderStatusUpdater from "@/components/admin/OrderStatusUpdater";
 import styles from "@/components/admin/orderDetail.module.css";
 import dashStyles from "@/app/(admin)/admin/(dashboard)/dashboard.module.css";
@@ -47,8 +48,13 @@ export default async function AdminOrderDetailPage({ params }: Props) {
         <Link href="/admin/orders" className={styles.backLink}>
           ← Back to All Orders
         </Link>
-        <div className={styles.actionRow}>
+        <div className={styles.actionRow} style={{ display: "flex", gap: "8px", alignItems: "center" }}>
           <PrintButton />
+          <DeleteOrderButton
+            orderId={order.id}
+            referenceNo={order.referenceNo}
+            redirectAfterDelete={true}
+          />
         </div>
       </div>
 

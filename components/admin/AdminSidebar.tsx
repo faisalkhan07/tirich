@@ -101,7 +101,9 @@ export default function AdminSidebar({
                 <span>{item.label}</span>
               </div>
               {item.badge > 0 && (
-                <span className={item.badgeStyle || styles.badge}>{item.badge}</span>
+                <span className={`${styles.badge} ${item.badgeStyle || ""}`}>
+                  {item.badge}
+                </span>
               )}
             </Link>
           );

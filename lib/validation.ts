@@ -62,6 +62,10 @@ export const bulkRequestSchema = z.object({
     message: "Requested delivery date must be today or in the future",
   }),
   customerName: z.string().trim().min(2, "Please enter your full name (at least 2 characters)"),
+  customerEmail: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address to receive your quote confirmation"),
   phone: z.string().trim().refine((val) => normalizePkPhone(val) !== null, {
     message: "Please enter a valid Pakistani mobile number (e.g. 0300 1234567)",
   }),

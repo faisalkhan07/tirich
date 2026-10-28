@@ -44,3 +44,20 @@ export async function PATCH(req: NextRequest, { params }: Props) {
     return NextResponse.json({ error: "Failed to update bulk request." }, { status: 500 });
   }
 }
+
+export async function DELETE(_req: NextRequest, { params }: Props) {
+  try {
+    const session = await getAdminSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { id } = await params;
+    await db.bulkRequest.delete({ where: { id } });
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error("Bulk request deletion error:", error);
+    return NextResponse.json({ error: "Failed to delete bulk request." }, { status: 500 });
+  }
+}

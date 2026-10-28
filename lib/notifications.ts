@@ -28,6 +28,7 @@ type BulkRequestData = {
   id: string;
   referenceNo: string;
   customerName: string;
+  customerEmail?: string | null;
   phone: string;
   city: string;
   quantity: number;
@@ -327,6 +328,49 @@ export async function notifyNewBulkRequest(request: BulkRequestData): Promise<vo
     subject: `🍏 [Fruit Quote Request] ${request.referenceNo} - ${request.quantity} KG of ${request.product.name}`,
     html: bulkHtml,
   });
+
+  // Customer confirmation email
+  if (request.customerEmail) {
+    const customerBulkHtml = `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; color: #10301A; padding: 24px; background: #faf8f2; border-radius: 12px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <h1 style="color: #10301A; margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.02em;">Tirich.</h1>
+          <p style="color: #5b6b5f; font-size: 14px; margin-top: 4px;">Fresh orchard fruit direct from Chitral</p>
+        </div>
+
+        <div style="background: #ffffff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 20px;">
+          <h2 style="color: #10301A; font-size: 18px; margin-top: 0;">Bulk Quote Request Received</h2>
+          <p style="color: #444; line-height: 1.5; font-size: 14px;">Hello ${request.customerName}, thank you for requesting bulk fruit from Tirich. Because orchard harvest prices update with each picking, our team will review today's rates and reach out via WhatsApp/Call to lock in your confirmed price.</p>
+          
+          <div style="background: #f7f3e8; border-left: 4px solid #b8f25b; padding: 10px 14px; border-radius: 4px; margin: 16px 0;">
+            <span style="font-size: 12px; color: #666; text-transform: uppercase; font-weight: bold; letter-spacing: 0.05em;">Request Reference:</span><br/>
+            <strong style="font-size: 18px; color: #10301A; font-family: monospace;">${request.referenceNo}</strong>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 20px; font-size: 14px;">
+          <h3 style="margin-top: 0; font-size: 16px; color: #10301A; border-bottom: 1px solid #eee; padding-bottom: 8px;">Request Summary</h3>
+          <p style="margin: 6px 0;"><strong>Fruit:</strong> ${request.product.name}</p>
+          <p style="margin: 6px 0;"><strong>Quantity:</strong> ${request.quantity} KG</p>
+          <p style="margin: 6px 0;"><strong>Target Delivery Date:</strong> ${targetDateStr}</p>
+          <p style="margin: 6px 0;"><strong>Delivery City:</strong> ${request.city}</p>
+          <p style="margin: 6px 0;"><strong>Contact Phone:</strong> ${request.phone}</p>
+          ${request.notes ? `<p style="margin: 6px 0;"><strong>Notes:</strong> ${request.notes}</p>` : ""}
+        </div>
+
+        <p style="text-align: center; font-size: 12px; color: #888; margin-top: 24px;">
+          Have questions or need immediate quote confirmation? Contact Hamad Sultan at <strong>+92 343 6818227</strong> on WhatsApp.<br/>
+          Tirich — Susoom Valley, Chitral, Pakistan
+        </p>
+      </div>
+    `;
+
+    await dispatchEmail({
+      to: request.customerEmail,
+      subject: `🍏 Bulk Quote Request #${request.referenceNo} - Tirich`,
+      html: customerBulkHtml,
+    });
+  }
 
   // 2. Zapier / Make Webhook (Optional)
   const zapierUrl = process.env.ZAPIER_WEBHOOK_URL?.trim();

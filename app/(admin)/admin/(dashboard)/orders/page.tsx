@@ -2,6 +2,7 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 import { formatPKR } from "@/lib/format";
 import { OrderStatus } from "@/lib/generated/prisma/enums";
+import DeleteOrderButton from "@/components/admin/DeleteOrderButton";
 import styles from "../dashboard.module.css";
 import orderStyles from "./orders.module.css";
 
@@ -14,12 +15,13 @@ type Props = {
 export default async function AdminOrdersPage({ searchParams }: Props) {
   const { status, q } = await searchParams;
 
+  const isAll = status === "ALL";
   const validStatus = status && Object.values(OrderStatus).includes(status as OrderStatus)
     ? (status as OrderStatus)
     : undefined;
 
   const whereClause: {
-    status?: OrderStatus;
+    status?: OrderStatus | { in: OrderStatus[] };
     OR?: Array<{
       referenceNo?: { contains: string; mode: "insensitive" };
       customerName?: { contains: string; mode: "insensitive" };
@@ -30,6 +32,10 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
 
   if (validStatus) {
     whereClause.status = validStatus;
+  } else if (!isAll) {
+    // Default active operational queue: NEW, CONFIRMED, DISPATCHED.
+    // Delivered orders automatically disappear from active queue!
+    whereClause.status = { in: ["NEW", "CONFIRMED", "DISPATCHED"] };
   }
 
   if (q && q.trim().length > 0) {
@@ -60,14 +66,16 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
 
   const [totalCount, newCount, confirmedCount, dispatchedCount, deliveredCount, cancelledCount] =
     counts;
+  const activeCount = newCount + confirmedCount + dispatchedCount;
 
   const tabs = [
-    { label: "All Orders", value: "", count: totalCount },
+    { label: "Active Queue", value: "", count: activeCount },
     { label: "New (Unprocessed)", value: "NEW", count: newCount },
     { label: "Confirmed", value: "CONFIRMED", count: confirmedCount },
     { label: "Dispatched", value: "DISPATCHED", count: dispatchedCount },
-    { label: "Delivered", value: "DELIVERED", count: deliveredCount },
+    { label: "Delivered (Archive)", value: "DELIVERED", count: deliveredCount },
     { label: "Cancelled", value: "CANCELLED", count: cancelledCount },
+    { label: "All Orders", value: "ALL", count: totalCount },
   ];
 
   return (
@@ -75,14 +83,20 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
       <div className={styles.pageHeader}>
         <div className={styles.titleGroup}>
           <h1>Jam Orders (Cash on Delivery)</h1>
-          <p>Review incoming jar orders, confirm packing, and dispatch COD deliveries.</p>
+          <p>
+            {validStatus === "DELIVERED"
+              ? "Completed orders archive."
+              : isAll
+              ? "Complete historical log of all customer orders."
+              : "Active order processing queue. Once delivered, orders automatically move to the Completed archive."}
+          </p>
         </div>
       </div>
 
       {/* Filter Tabs */}
       <div className={orderStyles.tabBar}>
         {tabs.map((tab) => {
-          const isActive = (tab.value === "" && !validStatus) || validStatus === tab.value;
+          const isActive = (tab.value === "" && !validStatus && !isAll) || (tab.value === "ALL" && isAll) || validStatus === tab.value;
           const href = tab.value ? `/admin/orders?status=${tab.value}` : "/admin/orders";
 
           return (
@@ -204,9 +218,12 @@ export default async function AdminOrdersPage({ searchParams }: Props) {
                         </span>
                       </td>
                       <td>
-                        <Link href={`/admin/orders/${order.id}`} className={styles.actionBtn}>
-                          Open Order →
-                        </Link>
+                        <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+                          <Link href={`/admin/orders/${order.id}`} className={styles.actionBtn}>
+                            Open Order →
+                          </Link>
+                          <DeleteOrderButton orderId={order.id} referenceNo={order.referenceNo} />
+                        </div>
                       </td>
                     </tr>
                   );

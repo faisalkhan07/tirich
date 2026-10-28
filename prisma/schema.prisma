@@ -131,8 +131,9 @@ model BulkRequest {
   productId    String
   quantity     Int
   unit         FruitUnit         @default(KG)
-  customerName String
-  phone        String
+  customerName  String
+  customerEmail String?
+  phone         String
   city         String
   deliveryDate DateTime
   notes        String?

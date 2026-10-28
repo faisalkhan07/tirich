@@ -31,6 +31,7 @@ export default function BulkRequestForm({ fruits, initialFruitSlug }: Props) {
   const [deliveryDate, setDeliveryDate] = useState<string>(minDateStr);
 
   const [customerName, setCustomerName] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
   const [notes, setNotes] = useState("");
@@ -64,6 +65,7 @@ export default function BulkRequestForm({ fruits, initialFruitSlug }: Props) {
           quantity: Number(quantity),
           deliveryDate,
           customerName,
+          customerEmail,
           phone,
           city,
           notes: notes || undefined,
@@ -270,6 +272,24 @@ export default function BulkRequestForm({ fruits, initialFruitSlug }: Props) {
                 placeholder="e.g. Tariq Mehmood"
                 className={styles.input}
               />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="customerEmail" className={styles.label}>
+                Email Address <span className={styles.req}>*</span>
+              </label>
+              <input
+                id="customerEmail"
+                type="email"
+                required
+                value={customerEmail}
+                onChange={(e) => setCustomerEmail(e.target.value)}
+                placeholder="you@example.com"
+                className={styles.input}
+              />
+              <span className={styles.hint}>
+                We will email your quote request confirmation and harvest update here.
+              </span>
             </div>
 
             <div className={styles.formGroup}>

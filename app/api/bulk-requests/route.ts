@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { productId, quantity, deliveryDate, customerName, phone, city, notes } =
+    const { productId, quantity, deliveryDate, customerName, customerEmail, phone, city, notes } =
       parsed.data;
 
     const normalizedPhone = normalizePkPhone(phone);
@@ -73,6 +73,7 @@ export async function POST(req: NextRequest) {
         quantity,
         unit: "KG",
         customerName,
+        customerEmail: customerEmail || null,
         phone: normalizedPhone,
         city,
         deliveryDate: new Date(deliveryDate),
@@ -90,6 +91,7 @@ export async function POST(req: NextRequest) {
         id: bulkRequest.id,
         referenceNo: bulkRequest.referenceNo,
         customerName: bulkRequest.customerName,
+        customerEmail: bulkRequest.customerEmail,
         phone: bulkRequest.phone,
         city: bulkRequest.city,
         quantity: bulkRequest.quantity,

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { formatPKR } from "@/lib/format";
+import DeleteBulkRequestButton from "@/components/admin/DeleteBulkRequestButton";
 import styles from "./bulkEditor.module.css";
 import dashStyles from "@/app/(admin)/admin/(dashboard)/dashboard.module.css";
 
@@ -12,6 +13,7 @@ type BulkReq = {
   quantity: number;
   unit: string;
   customerName: string;
+  customerEmail?: string | null;
   phone: string;
   city: string;
   deliveryDate: string | Date;
@@ -111,6 +113,7 @@ export default function BulkRequestEditor({ request }: { request: BulkReq }) {
           >
             {isEditing ? "Close" : "Edit / Record Quote ✏️"}
           </button>
+          <DeleteBulkRequestButton requestId={request.id} referenceNo={request.referenceNo} />
         </div>
       </div>
 
@@ -127,6 +130,14 @@ export default function BulkRequestEditor({ request }: { request: BulkReq }) {
             <li>
               <strong>Customer:</strong> {request.customerName} ({request.phone})
             </li>
+            {request.customerEmail && (
+              <li>
+                <strong>Email:</strong>{" "}
+                <a href={`mailto:${request.customerEmail}`} style={{ color: "var(--color-lime)", textDecoration: "underline" }}>
+                  {request.customerEmail}
+                </a>
+              </li>
+            )}
             <li>
               <strong>City:</strong> {request.city}
             </li>
