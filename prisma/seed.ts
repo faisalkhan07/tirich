@@ -49,6 +49,19 @@ const jams = [
       { label: "500g", price: 1100 },
     ],
   },
+  {
+    name: "Blackberry Jam",
+    slug: "blackberry-jam",
+    images: ["/images/jam-blackberry.jpg"],
+    description: "Handcrafted small-batch jam made from wild Chitrali mountain blackberries.",
+    ingredients: "Wild blackberries, sugar, lemon juice",
+    shelfLife: "12 months unopened. Refrigerate after opening.",
+    isFeatured: true,
+    variants: [
+      { label: "250g", price: 750 },
+      { label: "500g", price: 1400 },
+    ],
+  },
 ];
 
 // Sample guide prices only. The owner edits real prices in admin.
@@ -58,6 +71,10 @@ const fruits = [
   { name: "Mulberries", slug: "mulberries", unitPrice: 600, seasonNote: "May to Jun", images: ["/images/fruit-mulberries.jpg"] },
   { name: "Cherries", slug: "cherries", unitPrice: 900, seasonNote: "Jun", images: ["/images/fruit-cherries.jpg"] },
   { name: "Pomegranates", slug: "pomegranates", unitPrice: 500, seasonNote: "Oct to Dec", images: ["/images/fruit-pomegranates.jpg"] },
+  { name: "Pears", slug: "pears", unitPrice: 250, seasonNote: "Aug to Oct", images: ["/images/fruit-pears.jpg"] },
+  { name: "Kilao", slug: "kilao", unitPrice: 3800, seasonNote: "Year-round", images: ["/images/fruit-kilao.jpg"] },
+  { name: "Chilghoza", slug: "chilghoza", unitPrice: 8500, seasonNote: "Sep to Nov", images: ["/images/fruit-chilghoza.jpg"] },
+  { name: "Walnuts", slug: "walnuts", unitPrice: 250, seasonNote: "Sep to Nov", images: ["/images/fruit-walnut.jpg"] },
 ];
 
 async function main() {
@@ -82,7 +99,7 @@ async function main() {
   for (const fruit of fruits) {
     await db.product.upsert({
       where: { slug: fruit.slug },
-      update: { images: fruit.images },
+      update: { images: fruit.images, unitPrice: fruit.unitPrice },
       create: {
         ...fruit,
         type: "FRUIT",
