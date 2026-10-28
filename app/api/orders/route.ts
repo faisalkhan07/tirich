@@ -131,26 +131,30 @@ export async function POST(req: NextRequest) {
       return order;
     });
 
-    // Fire notifications asynchronously without delaying response
-    notifyNewOrder({
-      id: newOrder.id,
-      referenceNo: newOrder.referenceNo,
-      customerName: newOrder.customerName,
-      customerEmail: customerEmail || null,
-      phone: newOrder.phone,
-      address: newOrder.address,
-      city: newOrder.city,
-      notes: newOrder.notes,
-      subtotal: newOrder.subtotal,
-      deliveryFee: newOrder.deliveryFee,
-      total: newOrder.total,
-      items: validatedItems.map((valItem) => ({
-        nameSnapshot: valItem.variant.product.name,
-        labelSnapshot: valItem.variant.label,
-        priceSnapshot: valItem.variant.price,
-        quantity: valItem.quantity,
-      })),
-    }).catch((err) => console.error("Notification trigger error:", err));
+    // Await notification dispatch before sending response (required for Vercel Serverless runtime)
+    try {
+      await notifyNewOrder({
+        id: newOrder.id,
+        referenceNo: newOrder.referenceNo,
+        customerName: newOrder.customerName,
+        customerEmail: customerEmail || null,
+        phone: newOrder.phone,
+        address: newOrder.address,
+        city: newOrder.city,
+        notes: newOrder.notes,
+        subtotal: newOrder.subtotal,
+        deliveryFee: newOrder.deliveryFee,
+        total: newOrder.total,
+        items: validatedItems.map((valItem) => ({
+          nameSnapshot: valItem.variant.product.name,
+          labelSnapshot: valItem.variant.label,
+          priceSnapshot: valItem.variant.price,
+          quantity: valItem.quantity,
+        })),
+      });
+    } catch (err) {
+      console.error("Notification trigger error:", err);
+    }
 
     return NextResponse.json({
       ok: true,

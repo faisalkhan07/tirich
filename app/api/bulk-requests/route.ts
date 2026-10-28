@@ -84,21 +84,25 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Fire notifications asynchronously without delaying response
-    notifyNewBulkRequest({
-      id: bulkRequest.id,
-      referenceNo: bulkRequest.referenceNo,
-      customerName: bulkRequest.customerName,
-      phone: bulkRequest.phone,
-      city: bulkRequest.city,
-      quantity: bulkRequest.quantity,
-      deliveryDate: bulkRequest.deliveryDate,
-      notes: bulkRequest.notes,
-      product: {
-        name: bulkRequest.product.name,
-        unitPrice: bulkRequest.product.unitPrice,
-      },
-    }).catch((err) => console.error("Bulk request notification error:", err));
+    // Await notification dispatch before sending response (required for Vercel Serverless runtime)
+    try {
+      await notifyNewBulkRequest({
+        id: bulkRequest.id,
+        referenceNo: bulkRequest.referenceNo,
+        customerName: bulkRequest.customerName,
+        phone: bulkRequest.phone,
+        city: bulkRequest.city,
+        quantity: bulkRequest.quantity,
+        deliveryDate: bulkRequest.deliveryDate,
+        notes: bulkRequest.notes,
+        product: {
+          name: bulkRequest.product.name,
+          unitPrice: bulkRequest.product.unitPrice,
+        },
+      });
+    } catch (err) {
+      console.error("Bulk request notification error:", err);
+    }
 
     return NextResponse.json({
       ok: true,
