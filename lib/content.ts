@@ -22,8 +22,8 @@ export const footerLinks = [
 ];
 
 export const defaultSettings = {
-  whatsappNumber: "923000000000",
-  ownerEmail: "owner@example.com",
+  whatsappNumber: "923436818227",
+  ownerEmail: "hamadsultan662@gmail.com",
   deliveryNote: "Jam is delivered to your door. Cash on delivery only.",
   deliveryFee: "500",
   freeDeliveryThreshold: "5000",

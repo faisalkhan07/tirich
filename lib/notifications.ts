@@ -43,8 +43,8 @@ type BulkRequestData = {
  * Fails safely and non-blockingly.
  */
 export async function notifyNewOrder(order: OrderData): Promise<void> {
-  const settings = await getSettings().catch(() => ({ ownerEmail: process.env.ADMIN_EMAIL || "owner@example.com" }));
-  const ownerEmail = settings.ownerEmail || process.env.ADMIN_EMAIL || "benekhan07@gmail.com";
+  const settings = await getSettings().catch(() => ({ ownerEmail: process.env.ADMIN_EMAIL || "hamadsultan662@gmail.com" }));
+  const ownerEmail = settings.ownerEmail || process.env.ADMIN_EMAIL || "hamadsultan662@gmail.com";
 
   const totalJars = order.items.reduce((sum, item) => sum + item.quantity, 0);
   const itemsText = order.items
@@ -237,8 +237,8 @@ export async function notifyNewOrder(order: OrderData): Promise<void> {
  * Fails safely and non-blockingly.
  */
 export async function notifyNewBulkRequest(request: BulkRequestData): Promise<void> {
-  const settings = await getSettings().catch(() => ({ ownerEmail: process.env.ADMIN_EMAIL || "owner@example.com" }));
-  const ownerEmail = settings.ownerEmail || process.env.ADMIN_EMAIL || "benekhan07@gmail.com";
+  const settings = await getSettings().catch(() => ({ ownerEmail: process.env.ADMIN_EMAIL || "hamadsultan662@gmail.com" }));
+  const ownerEmail = settings.ownerEmail || process.env.ADMIN_EMAIL || "hamadsultan662@gmail.com";
 
   const targetDateStr = new Date(request.deliveryDate).toLocaleDateString("en-PK", {
     weekday: "long",

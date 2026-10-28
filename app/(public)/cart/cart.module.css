@@ -24,6 +24,14 @@
   margin-bottom: var(--space-6);
 }
 
+.emptyActions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .cartGrid {
   display: grid;
   grid-template-columns: 1fr;

@@ -28,11 +28,16 @@ export default function CartPage() {
           <div className={styles.emptyIcon}>🛒</div>
           <h1 className={styles.emptyTitle}>Your cart is empty</h1>
           <p className={styles.emptyText}>
-            Looks like you haven&apos;t added any jars of mountain jam to your cart yet.
+            Looks like you haven&apos;t added anything to your cart yet.
           </p>
-          <Link href="/jams" className="btn btn-primary">
-            Explore fresh jams
-          </Link>
+          <div className={styles.emptyActions}>
+            <Link href="/jams" className="btn btn-primary">
+              Explore fresh jams
+            </Link>
+            <Link href="/fruits" className="btn btn-outline">
+              Explore bulk fruits
+            </Link>
+          </div>
         </div>
       </div>
     );

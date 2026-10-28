@@ -81,7 +81,7 @@ export default function AdminLoginPage() {
               autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="e.g. benekhan07@gmail.com"
+              placeholder="e.g. hamadsultan662@gmail.com"
               className={styles.input}
               autoComplete="email"
             />

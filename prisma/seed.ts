@@ -111,11 +111,11 @@ async function main() {
     });
   }
 
-  const email = process.env.ADMIN_EMAIL ?? "owner@example.com";
-  const password = process.env.ADMIN_PASSWORD ?? "change-me-now";
+  const email = process.env.ADMIN_EMAIL ?? "hamadsultan662@gmail.com";
+  const password = process.env.ADMIN_PASSWORD ?? "hamadsultan123";
   await db.adminUser.upsert({
     where: { email },
-    update: {},
+    update: { passwordHash: hashPassword(password) },
     create: { email, passwordHash: hashPassword(password) },
   });
 

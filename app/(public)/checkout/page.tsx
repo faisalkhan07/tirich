@@ -149,18 +149,19 @@ export default function CheckoutPage() {
 
             <div className={styles.formGroup}>
               <label htmlFor="email" className={styles.label}>
-                Email Address <span className={styles.hint} style={{ fontWeight: 400 }}>(Optional)</span>
+                Email Address <span className={styles.req}>*</span>
               </label>
               <input
                 id="email"
                 type="email"
+                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 className={styles.input}
               />
               <span className={styles.hint}>
-                Provide your email if you would like an instant digital receipt and order updates.
+                We will email your order receipt and tracking updates here.
               </span>
             </div>
 

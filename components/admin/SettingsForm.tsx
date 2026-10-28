@@ -18,10 +18,10 @@ export default function SettingsForm({ initialSettings }: Props) {
   const router = useRouter();
 
   const [whatsappNumber, setWhatsappNumber] = useState(
-    initialSettings.whatsappNumber || "923000000000"
+    initialSettings.whatsappNumber || "923436818227"
   );
   const [ownerEmail, setOwnerEmail] = useState(
-    initialSettings.ownerEmail || "benekhan07@gmail.com"
+    initialSettings.ownerEmail || "hamadsultan662@gmail.com"
   );
   const [deliveryFee, setDeliveryFee] = useState(
     initialSettings.deliveryFee || "500"
@@ -97,10 +97,10 @@ export default function SettingsForm({ initialSettings }: Props) {
             value={whatsappNumber}
             onChange={(e) => setWhatsappNumber(e.target.value)}
             className={styles.input}
-            placeholder="923000000000"
+            placeholder="923436818227"
           />
           <span className={styles.hint}>
-            Country code + mobile number without plus (+) or dashes. Example: 923001234567.
+            Country code + mobile number without plus (+) or dashes. Example: 923436818227.
           </span>
         </div>
 
@@ -115,7 +115,7 @@ export default function SettingsForm({ initialSettings }: Props) {
             value={ownerEmail}
             onChange={(e) => setOwnerEmail(e.target.value)}
             className={styles.input}
-            placeholder="benekhan07@gmail.com"
+            placeholder="hamadsultan662@gmail.com"
           />
           <span className={styles.hint}>
             Email address for new order notification alerts.
